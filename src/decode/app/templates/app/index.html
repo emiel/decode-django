@@ -5,24 +5,32 @@
     <title>Decode</title>
   </head>
   <body>
-    <h1>Decode</h1>
+    <h1>Decoder</h1>
 {% if messages %}
     <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
     </ul>
 {% endif %}
+    <p>To decode, enter an encoded string (sequence of digits [1-9]) that
+    resembles one of following examples:</p>
+    <ul>
+      <li><pre>12</pre></li>
+      <li><pre>226</pre></li>
+      <li><pre>1234</pre></li>
+    </ul>
+    <p><i>Note: The maximum length is 30</i></p>
     <form action="." method="post">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="Decode">
     </form>
 {% if result %}
-    <h2>Result</h2>
+    <h2>Possible Decodings</h2>
     <ul>
     {% for s in result %}
-    <li>{{ s }}</li>
+    <li><pre>{{ s }}</pre></li>
     {% endfor %}
     </ul>
 {% endif %}

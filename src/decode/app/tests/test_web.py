@@ -11,8 +11,7 @@ class TestWeb(TestCase):
         """
         response = self.client.get(reverse("web-decode"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Decode", html=True)
-        self.assertNotContains(response, "Result", html=True)
+        self.assertContains(response, "Decoder", html=True)
 
     @mock.patch("app.web._process")
     def test_decode_post(self, mock_process):
