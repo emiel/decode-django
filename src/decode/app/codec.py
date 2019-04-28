@@ -42,9 +42,12 @@ def combos(lst, acc=(), depth=0):
 
     # Right node (double-digits)
     if length >= 2:
-        new_acc = (*acc, join_int(lst[0], lst[1]))
-        for c in combos(lst[2:], new_acc, depth + 1):
-            yield c
+        num = join_int(lst[0], lst[1])
+        # Only build nodes which fall within our encoding (1-26)
+        if num <= 26:
+            new_acc = (*acc, num)
+            for c in combos(lst[2:], new_acc, depth + 1):
+                yield c
 
 
 def decode_int(n):

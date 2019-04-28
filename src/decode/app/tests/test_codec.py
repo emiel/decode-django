@@ -18,7 +18,7 @@ class TestDecode(TestCase):
     def test_combos_1234(self):
         self.assertEqual(
             list(combos([1, 2, 3, 4])),
-            [(1, 2, 3, 4), (1, 2, 34), (1, 23, 4), (12, 3, 4), (12, 34)],
+            [(1, 2, 3, 4), (1, 23, 4), (12, 3, 4)],
         )
 
     def test_decode_12(self):
@@ -28,4 +28,4 @@ class TestDecode(TestCase):
         self.assertEqual(list(decode("226")), ["BBF", "BZ", "VF"])
 
     def test_decode_1234(self):
-        self.assertEqual(list(decode("1234")), ["ABCD", "AB_", "AWD", "LCD", "L_"])
+        self.assertEqual(list(decode("1234")), ["ABCD", "AWD", "LCD"])

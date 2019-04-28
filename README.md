@@ -65,8 +65,8 @@ Each unique path from root to leaf is a possible decoding. Traversing the tree
 could be done after it has been built but can also be done while building the
 tree.
 
-Nodes with values greater than 26 may be eliminated. As of now they are emitted
-as an underscore.
+Note: Nodes with values greater than 26 may be eliminated. As of now they are
+emitted as an underscore.
 
 ## API
 
@@ -109,7 +109,7 @@ consider here:
 - The actual end-user use case
 
 ## ToDo
-- API error handling, i.e. timeouts
 - Get clarification if nodes > 27 (outside of encoding range) may be
-  eliminated.
+  eliminated. Done => Eliminate them.
+- API error handling, i.e. timeouts
 - Add property based testing for codec
