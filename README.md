@@ -1,11 +1,15 @@
-# Decode
+# decode-django
+
+Decode in Django
 
 Components:
 - Encoding/Decoding
 - API wrapping decoding logic
 - End-user web page
 
-[web page -> api -> decode logic]
+The components fit together as follows:
+
+    [web page -> api -> decode logic]
 
 ## Encoding/Decoding
 
@@ -106,5 +110,6 @@ consider here:
 
 ## ToDo
 - API error handling, i.e. timeouts
- - Get clarification if nodes > 27 (outside of encoding range) may be
-   eliminated.
+- Get clarification if nodes > 27 (outside of encoding range) may be
+  eliminated.
+- Add property based testing for codec
