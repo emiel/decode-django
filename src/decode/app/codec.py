@@ -55,7 +55,6 @@ def decode(buf):
     :buf:
         A string containing only digits
 
-
     decode("12") -> ["AB", "L"]
     decode("226") -> ["BZ", "VF", "BBF"]
 

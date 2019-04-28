@@ -5,13 +5,26 @@
     <title>Decode</title>
   </head>
   <body>
+    <h1>Decode</h1>
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
     <form action="." method="post">
         {% csrf_token %}
         {{ form }}
-        <input type="submit" value="Submit">
+        <input type="submit" value="Decode">
     </form>
-    <p>
-      Result: {{ result }}
-    </p>
+{% if result %}
+    <h2>Result</h2>
+    <ul>
+    {% for s in result %}
+    <li>{{ s }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
   </body>
 </html>

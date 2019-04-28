@@ -8,6 +8,9 @@ input_re = re.compile("^[1-9]+$")
 
 
 def decode(request):
+    """
+    Decode endpoint
+    """
     input = request.GET.get("input", "")
 
     match = input_re.match(input)
