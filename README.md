@@ -3,17 +3,17 @@
 Decode in Django
 
 Components:
-- Encoding/Decoding
+- Decoding logic
 - API wrapping decoding logic
 - End-user web page
 
 The components fit together as follows:
 
-    [web page -> api -> decode logic]
+    [web page -> api -> decoding logic]
 
 ## Trying it out
 
-Requires Python 3 with virtualenv
+Requires Python 3 with virtualenv.
 
     $ cd decode-django
     $ virtualenv-3.7 venv37
@@ -53,21 +53,22 @@ ways.
 - (2, 26) or "BZ"
 - (22, 6) or "VF"
 
-To get there I've used a tree-based approach. Perhaps there are other ways and
-I'd be interested in hearing about them. Here goes!
+To get the combinations I've used a tree-based approach. Perhaps there are
+other ways and I'd be interested in hearing about them. Here goes!
 
-We'll use "1234" as our input string. Let's see if we break the problem down a
-bit, "divide and conquer". We know the encoding only goes up to 26 and so we
-only need to consider single and double-digit combinations. So 12 is valid but
-123 is definitely not a valid encoding. So looking at the first two digits we
-can say it is encoded as either 1 (followed by 2 or 23) or 12 (followed by 3 or
-34). We can apply the same logic to 2... it is followed by either 3 or 34.
+We'll use "1234" as our input string. Let's see if we can break the problem
+down a bit, ah la "divide and conquer". We know the encoding only goes up to 26
+and so we only need to consider single and double-digit combinations. So 12 is
+valid but 123 is definitely falls outside of the encoding. So looking at the
+first two digits (12) we can say it is encoded as either 1 (followed by 2 or 23) or
+12 (followed by 3 or 34). We can apply the same logic to 2... it is followed by
+either 3 or 34.
 
-<<Tree>>
+{{ Tree Diagram here }}
 
 Recursion
 
-Each node has an optional left and right edge.
+Each node has an optional left and right edge/node.
 
 You'll notice that we always have a possible decoding by taking each digit
 individually. This also gives an indication of the depth of the tree. So the
@@ -76,9 +77,6 @@ depth is equal to the length of the input string.
 Each unique path from root to leaf is a possible decoding. Traversing the tree
 could be done after it has been built but can also be done while building the
 tree.
-
-Note: Nodes with values greater than 26 may be eliminated. As of now they are
-emitted as an underscore.
 
 ## API
 
@@ -111,7 +109,7 @@ all decodings which are then itemized on the page.
 
 ## Bugs and Limitations
 
-For now the input string is capped to XX characters. Still need to re-evaluate
+For now the input string is capped to 30 characters. Still need to re-evaluate
 the maximum length of the input string. There are a number of factors to
 consider here:
 
