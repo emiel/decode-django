@@ -20,10 +20,10 @@ class DecodeForm(forms.Form):
 
 def _process(input_str, request):
     result = []
-    client = ApiClient()
+    api_client = ApiClient()
 
     try:
-        response = client.decode(input_str)
+        response = api_client.decode(input_str)
     except Exception as err:
         messages.error(request, str(err))
     else:

@@ -8,9 +8,8 @@ class ApiClient:
         self.session = requests.Session()
 
     def _request(self, method, data=None, params=None, **kwargs):
-        url_params = {}.update(params or {})
         response = self.session.request(
-            method, settings.ENDPOINT_URL, data=data, params=url_params, **kwargs
+            method, settings.ENDPOINT_URL, data=data, params=params, **kwargs
         )
         return response
 
