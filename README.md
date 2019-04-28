@@ -11,6 +11,18 @@ The components fit together as follows:
 
     [web page -> api -> decode logic]
 
+## Trying it out
+
+Requires Python 3 with virtualenv
+
+    $ cd decode-django
+    $ virtualenv-3.7 venv37
+    $ . ./venv37
+    $ pip install -r ./requirements.txt
+    $ make serve
+
+Then open a browser and navigate to `http://localhost:8000/app/web/`.
+
 ## Encoding/Decoding
 
 First lets dig into the encoding/decoding algorithm as it is lies at the core
