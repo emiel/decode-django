@@ -59,7 +59,8 @@ def decode_int(n):
     ..
     26 -> Z
 
-    > 26 -> _
+    Anything above 26 returns an underscore.
+
     :param n:
         The integer to decode
     :returns:
@@ -73,11 +74,8 @@ def decode(buf):
     decode("12") -> ["AB", "L"]
     decode("226") -> ["BZ", "VF", "BBF"]
 
-    XXX: Should combos > 26 be eliminated?
-    decode("34") -> ["_"]
-
     :param buf:
-        A string containing only digits
+        A string containing only digits (1-9)
     """
     lst = [int(c) for c in buf]
 
