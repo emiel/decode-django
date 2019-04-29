@@ -18,36 +18,54 @@ def join_int(fst, snd):
     return int(buf)
 
 
-def combos(lst, acc=(), depth=0):
-    """
-    Find all combinations recursively. Returns a generator.
+class Node:
+    def __init__(self, tail=[], acc=[], left=None, right=None):
+        self.tail = tail
+        self.acc = acc
+        self.left = left
+        self.right = right
 
-    :param lst:
-        Input list of natural numbers
-    :param acc:
-        Path accumulator
-    """
-    # print(depth * "-", "combo", lst, acc)
-    length = len(lst)
+    def is_leaf(self):
+        return self.left is None and self.right is None
 
-    # Base case
-    if length == 0:
-        yield acc
+    def __repr__(self, level=0, indent="--"):
+        s = level * indent + repr(self.tail) + "|" + repr(self.acc)
+        if self.left:
+            s = s + "\n" + self.left.__repr__(level + 1, indent)
+        if self.right:
+            s = s + "\n" + self.right.__repr__(level + 1, indent)
+        return s
 
-    # Left node (single-digits)
-    if length >= 1:
-        new_acc = (*acc, lst[0])
-        for c in combos(lst[1:], new_acc, depth + 1):
-            yield c
 
-    # Right node (double-digits)
-    if length >= 2:
+def tree(lst, acc=[]):
+    left = None
+    right = None
+
+    n = len(lst)
+
+    if n >= 1:
+        num = lst[0]
+        left = tree(lst[1:], acc + [num])
+
+    if n >= 2:
         num = join_int(lst[0], lst[1])
-        # Only build nodes which fall within our encoding (1-26)
         if num <= 26:
-            new_acc = (*acc, num)
-            for c in combos(lst[2:], new_acc, depth + 1):
-                yield c
+            right = tree(lst[2:], acc + [num])
+
+    return Node(lst, acc, left=left, right=right)
+
+
+def leaves(t):
+    if t.is_leaf():
+        yield t
+
+    if t.left is not None:
+        for leaf in leaves(t.left):
+            yield leaf
+
+    if t.right is not None:
+        for leaf in leaves(t.right):
+            yield leaf
 
 
 def decode_int(n):
@@ -79,6 +97,6 @@ def decode(buf):
     """
     lst = [int(c) for c in buf]
 
-    for t in combos(lst):
-        res = [decode_int(n) for n in t]
+    for combo in leaves(tree(lst)):
+        res = [decode_int(n) for n in combo.acc]
         yield "".join(res)
