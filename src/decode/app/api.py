@@ -4,7 +4,7 @@ from django.http import JsonResponse
 
 from . import codec
 
-input_re = re.compile("^[1-9]+$")
+input_re = re.compile(r"^\d+$")
 
 
 def decode(request):

@@ -8,7 +8,7 @@ from django.shortcuts import render
 from .api_client import ApiClient
 
 
-input_re = re.compile(r"^[1-9]+$")
+input_re = re.compile(r"^\d+$")
 
 
 class DecodeForm(forms.Form):

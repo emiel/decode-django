@@ -44,10 +44,9 @@ You probably already see an issue lurking here. Both "AB" and "L" are encoded
 in the same way. This makes decoding the result quite the challenge.
 
 The decoding of encoded strings assumes we're only dealing with numerical
-digits with zero excluded (as per the encoding). The decoding algorithm takes
-an encoded string and returns all the different ways the input could possibly
-be decoded. For example, the input string, "226" can be decoded in 3 different
-ways.
+digits (as per the encoding). The decoding algorithm takes an encoded string
+and returns all the different ways the input could possibly be decoded. For
+example, the input string, "226" can be decoded in 3 different ways.
 
 - (2, 2, 6) or "BBF"
 - (2, 26) or "BZ"

@@ -12,8 +12,8 @@ def join_int(fst, snd):
     :param snd:
         Second number
     """
-    assert fst > 0
-    assert snd > 0
+    assert fst >= 0
+    assert snd >= 0
     buf = str(fst) + str(snd)
     return int(buf)
 
@@ -36,15 +36,18 @@ def combos(lst, acc=(), depth=0):
 
     # Left node (single-digits)
     if length >= 1:
-        new_acc = (*acc, lst[0])
-        for c in combos(lst[1:], new_acc, depth + 1):
-            yield c
+        digit = lst[0]
+        if digit != 0:
+            new_acc = (*acc, lst[0])
+            for c in combos(lst[1:], new_acc, depth + 1):
+                yield c
 
     # Right node (double-digits)
     if length >= 2:
-        num = join_int(lst[0], lst[1])
         # Only build nodes which fall within our encoding (1-26)
-        if num <= 26:
+        fst, snd = lst[0], lst[1]
+        if fst in (1, 2) and snd <= 6:
+            num = join_int(fst, snd)
             new_acc = (*acc, num)
             for c in combos(lst[2:], new_acc, depth + 1):
                 yield c
@@ -75,7 +78,7 @@ def decode(buf):
     decode("226") -> ["BZ", "VF", "BBF"]
 
     :param buf:
-        A string containing only digits (1-9)
+        A string containing only digits (0-9)
     """
     lst = [int(c) for c in buf]
 
